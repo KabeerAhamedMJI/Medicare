@@ -7,7 +7,7 @@ import AppointmentPage from "../pages/patient/appointmentPage";
 import PatientProfilePage from "../pages/patient/patientProfilePage";
 import ErrorPage from "../pages/patient/errorPage";
 import PatientLayout from "../layouts/patientLayout";
-import Departmentpage from "../pages/patient/departmentpage";
+import Servicepage from "../pages/patient/servicepage";
 import PatientProtect from "./protectedRoutes/patientProtect";
 import BookAppointment from "../components/patient/bookAppointment";
 
@@ -29,6 +29,11 @@ export const router = createBrowserRouter([
                 path: '/patientSignupPage',
                 element: <PatientSignupPage />
             },
+            ,
+            {
+                path: 'servicePage',
+                element: <Servicepage />
+            }
         ]
     },
     {
@@ -54,10 +59,6 @@ export const router = createBrowserRouter([
             {
                 path: 'bookappointment',
                 element: <BookAppointment />
-            },
-            {
-                path: 'departmentPage',
-                element: <Departmentpage />
             }
         ]
     }
