@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  /* .headerBox {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  } */
+  .container{
+    max-width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container2{
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container3{
+    max-width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  body {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  section{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .sideIcon2{
+    position: absolute;
+    top: 50%;
+    right: 19%;
+  }
+  .sideIcon1{
+    position: absolute;
+    top: 50%;
+    left: 23%;
+  }
+  .para_Box{
+    width: 300px;
+    position: absolute;
+    top: 79%;
+    left: 6%;
+  }
+  .para_Box p{
+    font-size: 12px;
+    text-align: left;
+    color: rgb(235, 235, 235);
+  }
+  .button_box{
+    position: absolute;
+    top: 79%;
+    right: 13%;
+    transition: transform 0.4s ease;
+  }
+  .button_box:hover {
+    transform: translateY(-8px);
+  }
+  .Instant {
+    transition: transform 0.4s ease;
+  }
+  .Instant:hover {
+    transform: translateY(-8px);
+  }
+  .clickArrow{
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .activeTab{
+    border-radius: 18px;
+  }
+  .patientCard{
+    border-bottom: solid rgb(196, 196, 196) 1px;
+  }
+.boxes{
+  justify-content: space-between;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: #223C6F; 
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.custom-file-upload:hover {
+  background-color: rgb(223, 107, 6); 
+}
+
+#dropdown2{
+  background-color: transparent;
+  border: none;
+  border-style: none;
+  box-shadow: none;
+}
+
+.dropdown-no-shadow {
+  box-shadow: none !important;
+}
+
+  @media (min-width: 768px) {
+    #heading {
+      font-size: 6rem; 
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    #heading {
+      font-size: 14rem; 
+    }
+  }
