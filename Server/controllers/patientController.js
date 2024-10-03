@@ -27,7 +27,7 @@ export const patientCreate = async (req, res, next) => {
         const hashedPassword = bcrypt.hashSync(password, salt);
 
 
-        const otp = crypto.randomInt(100000, 999999).toString();
+        const otp = crypto.randomInt(1000, 9999).toString();
         const otpExpiry = new Date(Date.now() + 3 * 60 * 1000);
 
         cache.set(emailOrMobile, JSON.stringify({ fullName, emailOrMobile, hashedPassword, otp, otpExpiry }));
