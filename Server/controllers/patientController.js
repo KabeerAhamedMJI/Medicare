@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { cloudinaryInstance } from '../config/cloudinaryConfig.js';
 import { generateToken } from '../utis/generateToken.js';
-import { Patient } from '../models/patientModel.js'
+import { Patient } from '../models/patientModel.js';
 import NodeCache from 'node-cache';
 import crypto from 'crypto';
 import { sendOtp } from '../utis/generateOTP.js';
@@ -9,7 +9,6 @@ import { sendOtp } from '../utis/generateOTP.js';
 const cache = new NodeCache({ stdTTL: 120 });
 
 export const patientCreate = async (req, res, next) => {
-    
     try {
         const { fullName, emailOrMobile, password } = req.body;
 
@@ -26,7 +25,6 @@ export const patientCreate = async (req, res, next) => {
         const salt = 10;
         const hashedPassword = bcrypt.hashSync(password, salt);
 
-
         const otp = crypto.randomInt(1000, 9999).toString();
         const otpExpiry = new Date(Date.now() + 3 * 60 * 1000);
 
@@ -35,15 +33,12 @@ export const patientCreate = async (req, res, next) => {
         await sendOtp(emailOrMobile, otp);
 
         res.json({ success: true, message: "OTP sent for verification." });
-
-
     } catch (error) {
         res.status(error.status || 500).json({ message: error.message || 'Internal server error' });
     }
 }
 
 export const verifyOtpSignup = async (req, res, next) => {
-
     try {
         const { emailOrMobile, otp } = req.body;
         const cachedPatient = JSON.parse(await cache.get(emailOrMobile));
@@ -52,7 +47,7 @@ export const verifyOtpSignup = async (req, res, next) => {
             return res.status(400).json({ success: false, message: "OTP has expired or is invalid." });
         }
 
-        if (String(cachedPatient.otp) != String(otp)) {
+        if (String(cachedPatient.otp) !== String(otp)) {
             return res.status(400).json({ success: false, message: "Invalid OTP." });
         }
 
@@ -60,57 +55,61 @@ export const verifyOtpSignup = async (req, res, next) => {
             return res.status(400).json({ success: false, message: "OTP has expired." });
         }
 
-        
         const newPatient = new Patient({
             fullName: cachedPatient.fullName,
             emailOrMobile: cachedPatient.emailOrMobile,
             password: cachedPatient.hashedPassword,
         });
-        await newPatient.save()
+        await newPatient.save();
 
+        // Clear cache after successful signup
         cache.del(emailOrMobile);
 
-        const token = generateToken(emailOrMobile, 'Patient');
-        res.cookie('token', token);
+        const token = generateToken(cachedPatient.emailOrMobile, 'Patient');
+
+        // Set cookie with options
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true, // Set to true if using HTTPS
+            sameSite: 'None', // Required for cross-origin requests
+        });
+
         res.json({ success: true, message: "Patient Created Successfully" });
     } catch (error) {
-
+        res.status(error.status || 500).json({ message: error.message || "Internal server error" });
     }
 }
-
 
 export const patientLogin = async (req, res, next) => {
     try {
         const { emailOrMobile, password } = req.body;
 
         if (!emailOrMobile || !password) {
-            return res.status(400).json({ success: false, message: "All feilds required" })
+            return res.status(400).json({ success: false, message: "All fields required" });
         }
 
         const patientExist = await Patient.findOne({ emailOrMobile });
 
         if (!patientExist) {
-            return res.status(400).json({ success: false, message: "user does not exist" })
+            return res.status(400).json({ success: false, message: "User does not exist" });
         }
 
         const passwordMatch = bcrypt.compareSync(password, patientExist.password);
         if (!passwordMatch) {
-            return res.status(400).json({ success: false, message: "user not authenticated : Incorrect Password" });
+            return res.status(400).json({ success: false, message: "User not authenticated: Incorrect Password" });
         }
 
         const otp = crypto.randomInt(1000, 9999).toString();
         const otpExpiry = new Date(Date.now() + 3 * 60 * 1000);
 
-        cache.set(emailOrMobile, JSON.stringify({ emailOrMobile, password, otp, otpExpiry }));
+        cache.set(emailOrMobile, JSON.stringify({ emailOrMobile, otp, otpExpiry }));
 
         await sendOtp(emailOrMobile, otp);
 
         res.json({ success: true, message: "OTP sent for verification." });
-
     } catch (error) {
         res.status(error.status || 500).json({ message: error.message || "Internal server error" });
     }
-
 }
 
 export const verifyOtpLogin = async (req, res) => {
@@ -132,52 +131,48 @@ export const verifyOtpLogin = async (req, res) => {
             return res.status(400).json({ success: false, message: "OTP has expired." });
         }
 
-        const token = generateToken(emailOrMobile, 'patient');
-        res.cookie('token', token)
+        const token = generateToken(emailOrMobile, 'Patient');
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true, 
+            sameSite: 'None',
+        });
 
         cache.del(emailOrMobile);
         res.json({ success: true, message: "Login successful" });
     } catch (error) {
         res.status(error.status || 500).json({ message: error.message || "Internal server error" });
     }
-
 }
 
 export const patientProfile = async (req, res, next) => {
     try {
-   
         const patient = req.user;
 
-        console.log(patient)
-
-        const patientData = await Patient.findOne({emailOrMobile: patient.email}).select("-password");
+        const patientData = await Patient.findOne({ emailOrMobile: patient.email }).select("-password");
 
         if (!patientData) {
-            return res.status(error).json({ success: false, message: "patient data could not fetch" })
+            return res.status(404).json({ success: false, message: "Patient data could not be fetched" });
         }
 
-        res.json({ success: true, message: "Patient Data Fetched..!", data: patientData });
+        res.json({ success: true, message: "Patient Data Fetched!", data: patientData });
     } catch (error) {
         res.status(error.status || 500).json({ message: error.message || "Internal server error" });
     }
 }
 
 export const patientUpdate = async (req, res, next) => {
-
     try {
-
         const { id } = req.params;
         const { fullName, phoneNumber, email, gender, bloodGroup, address, age } = req.body;
-        const patientId = req.params.patientId; 
 
         const updateData = { fullName, phoneNumber, email, gender, bloodGroup, address, age };
 
-   
         if (req.file) {
             const result = await cloudinaryInstance.uploader.upload(req.file.path);
             updateData.profilePic = result.secure_url;
         }
-    
+
         const patientData = await Patient.findByIdAndUpdate(id, updateData, { new: true });
 
         if (!patientData) {
@@ -201,15 +196,12 @@ export const patientUpdate = async (req, res, next) => {
     }
 };
 
-
-
-
 export const allPatientsList = async (req, res, next) => {
     try {
         const patients = await Patient.find();
 
         if (!patients) {
-            return res.status(404).json({ success: false, message: 'Patients data could not fetch' });
+            return res.status(404).json({ success: false, message: 'Patients data could not be fetched' });
         }
 
         res.status(200).json({ success: true, message: 'Patients Data Fetched!', data: patients });
@@ -221,8 +213,7 @@ export const allPatientsList = async (req, res, next) => {
 export const patientLogout = async (req, res, next) => {
     try {
         res.clearCookie("token");
-
-        res.json({ success: true, message: "Patient logout successfully" });
+        res.json({ success: true, message: "Patient logged out successfully" });
     } catch (error) {
         res.status(error.status || 500).json({ message: error.message || "Internal server error" });
     }
