@@ -59,6 +59,10 @@ export const router = createBrowserRouter([
             {
                 path: 'bookappointment',
                 element: <BookAppointment />
+            },
+            {
+                path: 'servicePage',
+                element: <Servicepage />
             }
         ]
     }
