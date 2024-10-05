@@ -9,7 +9,8 @@ export const DoctorsListCard = () => {
     const [activeTab, setActiveTab] = useState(null);
     const [doctors, setDoctors] = useState([]);
     const [activeDepartment, setActiveDepartment] = useState(null);
-    const department = useSelector((state) => state.department.department);
+    const departmentses = useSelector((state) => state.department.department);
+    console.log('Redux departments state:', departmentses);
     const dispatch = useDispatch();
 
     const fetchDepartments = async () => {
@@ -20,6 +21,7 @@ export const DoctorsListCard = () => {
             });
 
             const departmentData = response?.data?.data || [];
+            console.log('Department Data before dispatch:', departmentData);
             dispatch(setdepartment(departmentData));
             setDepartments(departmentData);
 
@@ -35,6 +37,13 @@ export const DoctorsListCard = () => {
     useEffect(() => {
         fetchDepartments();
     }, []);
+    
+    useEffect(() => {
+        if (departmentses.length > 0) {
+            console.log('Departments from Redux state:', departmentses);
+        }
+    }, [departmentses]);
+    
 
     const fetchDoctorsDetails = async (doctorIds) => {
         try {
@@ -74,7 +83,7 @@ export const DoctorsListCard = () => {
                 <div className='containers'>
                     <div className="flex mb-4 overflow-x-auto md:overflow-x-visible">
                         <div className='flex mb-4'>
-                            {departments.map((department) => (
+                            {departments.slice(0, 6).map((department) => (
                                 <button
                                     key={department._id}
                                     id='skillButton'

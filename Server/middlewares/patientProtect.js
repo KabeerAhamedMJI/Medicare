@@ -25,7 +25,7 @@ export const patientProtect = (req, res, next) => {
             }
         }
 
-        if (tokenVerified.role !== "doctor" && tokenVerified.role !== "admin" && tokenVerified.role !== "patient") {
+        if (tokenVerified.role !== "doctor" && tokenVerified.role !== "admin" && tokenVerified.role !== 'Patient') {
             return res.status(400).json({ success: false, message: 'Not authenticated' })
         }
         req.user = tokenVerified

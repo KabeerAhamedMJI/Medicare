@@ -10,7 +10,7 @@ const PatientProtect = ({ children }) => {
     const patientCheck = async () => {
         try {
             const response = await axiosInstance({
-                url: '/patient/check-Patient',
+                url: 'patient/check-Patient',
                 method: 'GET',
                 withCredentials: true,
             });

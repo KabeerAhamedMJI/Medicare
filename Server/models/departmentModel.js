@@ -19,6 +19,10 @@ const departmentSchema = new mongoose.Schema(
             type: mongoose.Types.ObjectId,
             ref: 'Doctor'
         },
+        consultationFee:{
+            type: Number,
+            default: 499
+        },
         symptoms: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Symptom'

@@ -1,20 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-export const departmentSlice = createSlice({
-  name: "department",
+const departmentSlice = createSlice({
+  name: 'department',
   initialState: {
-    department: {},
+    department: [],
   },
   reducers: {
     setdepartment: (state, action) => {
       state.department = action.payload;
     },
-    resetdepartment: (state) => {
-      state.department = [];
-    },
   },
 });
 
-export const { setdepartment,resetdepartment } = departmentSlice.actions;
-
+export const { setdepartment } = departmentSlice.actions;
 export default departmentSlice.reducer;
+

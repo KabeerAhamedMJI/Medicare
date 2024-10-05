@@ -71,14 +71,14 @@ const PatientHeader = () => {
                     <i className="fa-solid fa-chevron-down text-sm sm:text-base"></i>
                 </div>
                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 sm:w-52 p-2 shadow">
-                    <li><Link style={{ color: '#223C6F' }} to="/">Gyneacology</Link></li>
-                    <li><Link style={{ color: '#223C6F' }} to="/">Sexology</Link></li>
-                    <li><Link style={{ color: '#223C6F' }} to="/">General Physician</Link></li>
-                    <li><Link style={{ color: '#223C6F' }} to="/">Dermatology</Link></li>
-                    <li><Link style={{ color: '#223C6F' }} to="/">Psychiatry</Link></li>
-                    <li><Link style={{ color: '#223C6F' }} to="/">Stomach & Digestion</Link></li>
-                    <li><Link style={{ color: '#223C6F' }} to="/">Pediatrics</Link></li>
-                    <li><Link style={{ color: '#223C6F' }} to="/">Urology</Link></li>
+                    <li><Link style={{ color: '#223C6F' }} to="/patient/servicePage">Gyneacology</Link></li>
+                    <li><Link style={{ color: '#223C6F' }} to="/patient/servicePage">Sexology</Link></li>
+                    <li><Link style={{ color: '#223C6F' }} to="/patient/servicePage">General Physician</Link></li>
+                    <li><Link style={{ color: '#223C6F' }} to="/patient/servicePage">Dermatology</Link></li>
+                    <li><Link style={{ color: '#223C6F' }} to="/patient/servicePage">Psychiatry</Link></li>
+                    <li><Link style={{ color: '#223C6F' }} to="/patient/servicePage">Stomach & Digestion</Link></li>
+                    <li><Link style={{ color: '#223C6F' }} to="/patient/servicePage">Pediatrics</Link></li>
+                    <li><Link style={{ color: '#223C6F' }} to="/patient/servicePage">Urology</Link></li>
                 </ul>
             </div>
         </div>

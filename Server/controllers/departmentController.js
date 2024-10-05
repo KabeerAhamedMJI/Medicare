@@ -5,12 +5,12 @@ import mongoose from 'mongoose';
 
 export const createDepartment = async (req, res, next) => {
     try {
-        const { name, description, HOD } = req.body;
+        const { name, description, HOD, consultationFee } = req.body;
 
         const uploadResult = await cloudinaryInstance.uploader.upload(req.file.path).catch((error) => { console.log(error) });
         console.log(uploadResult);
 
-        if (!name || !description || !HOD || !mongoose.Types.ObjectId.isValid(HOD)) {
+        if (!name || !description || !HOD || !consultationFee || !mongoose.Types.ObjectId.isValid(HOD)) {
             return res.status(400).json({ message: "Invalid HOD ID" });
         }
 
@@ -18,6 +18,7 @@ export const createDepartment = async (req, res, next) => {
             name,
             description,
             image: uploadResult.secure_url,
+            consultationFee,
             HOD
         });
 
@@ -65,16 +66,16 @@ export const getSingleDepartment = async (req, res, next) => {
 
 export const updateDepartment = async (req, res, next) => {
     try {
-        const { name, description, HOD, doctors } = req.body;
+        const { name, description, HOD, doctors, consultationFee} = req.body;
         const { id } = req.params;
 
-        console.log('Update body:', { name, description, HOD, doctors });
+        console.log('Update body:', { name, description, HOD, doctors, consultationFee});
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: "Invalid department ID" });
         }
 
-        const updateData = { name, description, HOD, doctors };
+        const updateData = { name, description, HOD, doctors, consultationFee};
 
         if (req.file) {
             const uploadResult = await cloudinaryInstance.uploader.upload(req.file.path);
