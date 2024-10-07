@@ -115,7 +115,7 @@ const reviewCard = () => {
                                     alt="patient"
                                 />
                             </div>
-                            <div className='flex flex-row md:flex-col'>
+                            <div className='flex flex-col'>
                                 <span className='font-bold text-lg'>Varun Das</span>
                                 <span className='text-gray-500'>Patient</span>
                             </div>
