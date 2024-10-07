@@ -3,6 +3,7 @@ import DarkMode from './ui/darkMode';
 import { Link } from 'react-router-dom';
 import DiscountImage from '../assets/images/Static Images/Discount.png';
 import Logo from '../assets/images/Static Images/Logo.png';
+import { TbDeviceMobilePlus } from "react-icons/tb";
 
 const Header = () => {
   return (
@@ -22,22 +23,14 @@ const Header = () => {
               className="input pl-10 w-full rounded-xxl text-sm sm:text-base"
             />
           </div>
-          <div className="dropdown dropdown-bottom hidden lg:flex">
-            <div tabIndex={0} role="button" className="g-transparent m-1 gap-2 flex items-center text-sm sm:text-base">
-              <span className='text-[#223C6F]'>Medicare 25+ Specialities</span>
-              <i className="fa-solid fa-chevron-down text-sm sm:text-base"></i>
+          <Link to="/servicePage">
+            <div className='md:ml-12'>
+              <div tabIndex={0} role="button" className="border border-[#223C6F] text-[#223C6F] rounded-md px-2 py-1 gap-2 flex items-center text-xs sm:text-sm md:text-sm shadow-md hover:bg-[#223C6F] hover:text-white active:scale-100 transition-colors duration-200 ease-in-out whitespace-nowrap">
+                <TbDeviceMobilePlus className="w-4 h-4 sm:w-3 sm:h-3 md:w-6 md:h-6" />
+                <span>Consult Online</span>
+              </div>
             </div>
-            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 sm:w-52 p-2 shadow">
-              <li><Link style={{ color: '#223C6F' }} to="/servicePage">Gyneacology</Link></li>
-              <li><Link style={{ color: '#223C6F' }} to="/servicePage">Sexology</Link></li>
-              <li><Link style={{ color: '#223C6F' }} to="/servicePage">General Physician</Link></li>
-              <li><Link style={{ color: '#223C6F' }} to="/servicePage">Dermatology</Link></li>
-              <li><Link style={{ color: '#223C6F' }} to="/servicePage">Psychiatry</Link></li>
-              <li><Link style={{ color: '#223C6F' }} to="/servicePage">Stomach & Digestion</Link></li>
-              <li><Link style={{ color: '#223C6F' }} to="/servicePage">Pediatrics</Link></li>
-              <li><Link style={{ color: '#223C6F' }} to="/servicePage">Urology</Link></li>
-            </ul>
-          </div>
+          </Link>
         </div>
         <div className="flex flex-row items-center gap-4 md:gap-8 pr-4 ">
           <div>

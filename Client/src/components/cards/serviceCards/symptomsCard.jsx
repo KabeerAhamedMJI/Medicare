@@ -73,7 +73,7 @@ function SymptomsCard() {
                         </div>
                     </div>
 
-                    <div className="slide-item px-6">
+                    <div className="slide-item px-6 mb-3">
                         <div className="flex flex-col justify-start gap-4 border-b-2  rounded-lg border-gray-200 pb-4 shadow-lg">
                             <div className="flex flex-col items-center">
                                 <img

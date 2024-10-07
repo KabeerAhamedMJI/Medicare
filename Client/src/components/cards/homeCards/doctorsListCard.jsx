@@ -81,7 +81,7 @@ export const DoctorsListCard = () => {
                     </h2>
                 </div>
                 <div className='containers'>
-                    <div className="flex mb-4 overflow-x-auto md:overflow-x-visible">
+                    <div className="flex mb-4 overflow-x-auto lg:overflow-x-visible">
                         <div className='flex mb-4'>
                             {departments.slice(0, 6).map((department) => (
                                 <button

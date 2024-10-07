@@ -66,7 +66,7 @@ const SpecialityCard = () => {
                                             className='w-22 h-22 mb-4'
                                         />
                                         <div className='flex flex-col items-center gap-2'>
-                                            <h3 className="text-base font-semibold text-gray-800 mb-2">{department.name}</h3>
+                                            <h3 className="text-base font-semibold text-gray-500 mb-2">{department.name}</h3>
                                             <span className="text-sm text-gray-500 mb-1">₹ {department.consultationFee}</span>
                                             <div className='flex flex-row items-center'>
                                                 <Link to="" className="text-[#072A6F] text-sm font-medium font-semibold">
