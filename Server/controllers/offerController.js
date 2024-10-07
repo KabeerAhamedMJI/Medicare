@@ -1,9 +1,11 @@
 import { Offer } from '../models/offerModel.js';
+import { cloudinaryInstance } from '../config/cloudinaryConfig.js';
 
 export const createOffer = async (req, res, next) => {
     try {
         const { title, description, validFrom, validUntil, termsAndConditions } = req.body;
 
+        const uploadResult = await cloudinaryInstance.uploader.upload(req.file.path).catch((error) => { console.log(error) });
 
         if (!title || !description || !validFrom || !validUntil || !termsAndConditions) {
             return res.status(400).json({ success: false, message: "All fields are required" });
@@ -21,6 +23,7 @@ export const createOffer = async (req, res, next) => {
             validFrom,
             validUntil,
             termsAndConditions,
+            image: uploadResult.secure_url,
         });
 
         return res.status(201).json({ success: true, data: newOffer });
@@ -64,10 +67,15 @@ export const getSingleOffer = async (req, res, next) => {
 
 export const updateOffer = async (req, res, next) => {
     try {
-        const { title, description, validFrom, validUntil, termsAndConditions } = req.body;
+        const { title, description, validFrom, validUntil, termsAndConditions, image } = req.body;
 
         const { id } = req.params;
-        const updateData = { title, description, validFrom, validUntil, termsAndConditions };
+        const updateData = { title, description, validFrom, validUntil, termsAndConditions, image };
+
+        if (req.file) {
+            const uploadResult = await cloudinaryInstance.uploader.upload(req.file.path);
+            updateData.image = uploadResult.secure_url;
+        }
         const updatedOffer = await Offer.findByIdAndUpdate(id, updateData, { new: true });
 
         if (!updatedOffer) {

@@ -11,6 +11,7 @@ import { IoLogOut } from "react-icons/io5";
 import { patientLogout } from '../../services/patientApi';
 import { setpatient } from '../../redux/features/patientSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { TbDeviceMobilePlus } from "react-icons/tb";
 
 const PatientHeader = () => {
     const navigate = useNavigate();
@@ -76,7 +77,7 @@ const PatientHeader = () => {
         </div>
         <div className="flex flex-row items-center gap-3 md:gap-8 pr-4"> 
             <div className='hidden md:flex'>
-                <Link className="flex flex-row items-center gap-1 text-sm sm:text-base" to={'/'}>
+                <Link className="flex flex-row items-center gap-1 text-sm sm:text-base" to="/patient/servicePage">
                     <img className="w-5 sm:w-6 md:w-6 lg:w-6 xl:w-6" src={DiscountImage} alt="Discount" />
                     <span className="text-[#FA9334]">Offers</span>
                 </Link>
@@ -86,7 +87,7 @@ const PatientHeader = () => {
             </div>
             <div className="dropdown dropdown-bottom flex flex-row items-center justify-center">
                 <div id='dropdown2' tabIndex={0} role="button" className="btn m-1 flex flex-row items-center justify-center">
-                    <img className='w-8 h-8 rounded-full' src={"https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"} alt="Profile" />
+                    <img className='w-8 h-8 rounded-full' src={"https://static.vecteezy.com/system/resources/thumbnails/001/609/720/small_2x/man-face-avatar-cartoon-free-vector.jpg"} alt="Profile" />
                     <span className=' hidden md:flex text-[#223C6F] font-normal'>{patient?.fullName || 'Not available'}</span>
                     <i className="fa-solid fa-caret-down"></i>
                 </div>

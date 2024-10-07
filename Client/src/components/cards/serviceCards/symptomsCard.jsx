@@ -9,22 +9,21 @@ function OnlineCard() {
 
     const symptomsList = async () => {
         try {
-    
+
             const response = await axiosInstance({
                 url: `/symtoms/symtomslist`,
                 method: "GET",
             })
             setSymptom(response?.data?.data)
-            console.log(response?.data?.data)
             return response?.data
         } catch (error) {
             console.log(error)
         }
     }
 
-useEffect(()=>{
-    symptomsList()
-},[])
+    useEffect(() => {
+        symptomsList()
+    }, [])
     var settings = {
         dots: true,
         infinite: false,
@@ -66,15 +65,15 @@ useEffect(()=>{
                 </div>
                 <Link to="/specialities">
                     <div className="hidden md:flex border border-gray-500 rounded-lg px-4 py-1 text-base text-gray-700 text-md hover:bg-[#072A6F] hover:text-white transition-all cursor-pointer">
-                        See All Symptoms
+                        See all symptoms
                     </div>
                 </Link>
             </div>
             <div className="slider-container px-6">
-            <Slider {...settings}>
+                <Slider {...settings}>
                     {symptoms.map((symptom) => (
                         <div key={symptom.id} className="slide-symptom px-4">
-                            <div className="flex flex-col justify-start gap-4 border-b-2 rounded-lg border-gray-200 pb-4 shadow-lg">
+                            <div className="flex flex-col justify-start gap-4 border-b-2 rounded-lg border-gray-200 pb-2 mb-4 shadow-lg">
                                 <div className="flex flex-col symptoms-center">
                                     <img
                                         className="rounded-t-lg w-full object-cover"
@@ -83,7 +82,7 @@ useEffect(()=>{
                                     />
                                     <div className="flex flex-col symptoms-center justify-center p-4">
                                         <h2 className="text-lg font-semibold text-gray-500">{symptom.title}</h2>
-                                        <span className="text-gray-600"> ₹ {symptom.cost}</span> 
+                                        <span className="text-gray-600"> ₹ {symptom.cost}</span>
                                         <div className="flex flex-row symptoms-center pt-4">
                                             <Link to={`/consult/${symptom.id}`} className="text-[#072A6F] text-sm font-semibold hover:text-blue-800 transition">
                                                 Consult Now
@@ -96,7 +95,12 @@ useEffect(()=>{
                         </div>
                     ))}
                 </Slider>
-            </div>
+            </div>   
+            <Link to="/specialities">
+                <div className="flex block md:hidden border border-gray-500 rounded-lg px-4 py-1 text-base text-gray-700 text-md hover:bg-[#072A6F] hover:text-white transition-all cursor-pointer mt-3 justify-center items-center mt-6">
+                    See all specialities
+                </div>
+            </Link>
         </section>
     );
 }

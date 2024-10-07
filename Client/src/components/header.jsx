@@ -34,7 +34,7 @@ const Header = () => {
         </div>
         <div className="flex flex-row items-center gap-4 md:gap-8 pr-4 ">
           <div>
-            <Link className="hidden md:flex flex-row items-center gap-1 text-sm sm:text-base" to={'/'}>
+            <Link className="hidden md:flex flex-row items-center gap-1 text-sm sm:text-base" to="/servicePage">
               <img className="w-5 sm:w-6 md:w-6 lg:w-6 xl:w-6" src={DiscountImage} alt="Discount" />
               <span className="text-[#FA9334]">Offers</span>
             </Link>

@@ -85,10 +85,10 @@ const SpecialityCard = () => {
                 </div>
             </div>
             <Link to="/specialities">
-                        <div className="flex block md:hidden border border-gray-500 rounded-lg px-4 py-1 text-base text-gray-700 text-md hover:bg-[#072A6F] hover:text-white transition-all cursor-pointer mt-3 justify-center items-center">
-                            See all specialities
-                        </div>
-                    </Link>
+                <div className="flex block md:hidden border border-gray-500 rounded-lg px-4 py-1 text-base text-gray-700 text-md hover:bg-[#072A6F] hover:text-white transition-all cursor-pointer mt-3 justify-center items-center">
+                    See all specialities
+                </div>
+            </Link>
         </section>
     );
 };
