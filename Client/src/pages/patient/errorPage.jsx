@@ -19,10 +19,10 @@ const ErrorPage = () => {
   const handleLinkClick = (event) => {
     event.preventDefault(); 
   
-    if (!authenticated) {
-      navigate('/');
-    } else {
+    if (authenticated) {
       navigate('/patient');
+    } else {
+      navigate('/');
     }
   }; 
 
