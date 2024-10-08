@@ -69,7 +69,7 @@ const SpecialityCard = () => {
                                             <h3 className="text-base font-semibold text-gray-500 mb-2">{department.name}</h3>
                                             <span className="text-sm text-gray-500 mb-1">₹ {department.consultationFee}</span>
                                             <div className='flex flex-row items-center'>
-                                                <Link to="" className="text-[#072A6F] text-sm font-medium font-semibold">
+                                                <Link to="/patient/bookappointment" className="text-[#072A6F] text-sm font-medium font-semibold">
                                                     Consult Now
                                                 </Link>
                                                 <HiChevronRight />

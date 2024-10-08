@@ -84,7 +84,7 @@ function OnlineCard() {
                                         <h2 className="text-lg font-semibold text-gray-500">{symptom.title}</h2>
                                         <span className="text-gray-600"> ₹ {symptom.cost}</span>
                                         <div className="flex flex-row symptoms-center pt-4">
-                                            <Link to={`/consult/${symptom.id}`} className="text-[#072A6F] text-sm font-semibold hover:text-blue-800 transition">
+                                            <Link to="/patient/bookappointment" className="text-[#072A6F] text-sm font-semibold hover:text-blue-800 transition">
                                                 Consult Now
                                             </Link>
                                             <HiChevronRight className="text-[#072A6F]" />
