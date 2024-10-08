@@ -20,9 +20,9 @@ const ErrorPage = () => {
     event.preventDefault(); 
   
     if (!authenticated) {
-      navigate('/patient');
-    } else {
       navigate('/');
+    } else {
+      navigate('/patient');
     }
   }; 
 
