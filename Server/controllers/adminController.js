@@ -24,7 +24,7 @@ export const adminLogin = async (req, res, next) => {
             return res.status(400).json({ success: false, message: "Admin not authenticated" });
         }
 
-        const otp = crypto.randomInt(100000, 999999).toString();
+        const otp = crypto.randomInt(1000, 9999).toString();
         const otpExpiry = new Date(Date.now() + 3 * 60 * 1000);
 
         cache.set(email, JSON.stringify({ email, password, otp, otpExpiry }));
@@ -49,7 +49,7 @@ export const verifyOtpLogin = async (req, res) => {
 
         const cachedAdmin = JSON.parse(cachedData);
 
-        if (!cachedAdmin.otp == otp) {
+        if (String(cachedAdmin.otp) !== String(otp)) {
             return res.status(400).json({ success: false, message: "Invalid OTP." });
         }
 

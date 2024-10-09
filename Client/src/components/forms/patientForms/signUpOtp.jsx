@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import OTPInput from 'react-otp-input';
 import toast from 'react-hot-toast';
 import { NavLink, useNavigate } from 'react-router-dom';
-import Hospital from '../../../assets/images/Static Images/hospital.jpg'
+import Appointments from '../../../assets/images/Static Images/appointment.jpg'; // Use the same image as in LoginForm
 import { signUpOtp } from '../../../services/patientApi';
 
 const SignUpOtp = ({ emailOrMobile, data }) => {
@@ -20,7 +20,7 @@ const SignUpOtp = ({ emailOrMobile, data }) => {
       console.log(response);
 
       if (response.success) {
-        toast.success("SignedUp successfully.");
+        toast.success("Signed up successfully.");
         navigate('/patientLoginpage');
       } else {
         toast.error('OTP has expired or invalid.');
@@ -32,7 +32,7 @@ const SignUpOtp = ({ emailOrMobile, data }) => {
   };
 
   return (
-    <section>
+    <section className="container">
       <div className="container2 border-b-2 flex flex-row gap-9 items-center justify-center">
         <NavLink
           to='/patientLoginpage'
@@ -51,16 +51,22 @@ const SignUpOtp = ({ emailOrMobile, data }) => {
           SignUp
         </NavLink>
       </div>
-      <div className="flex justify-center items-center px-5 lg:px-0">
-        <div className="max-w-screen-xl md:flex bg-white sm:rounded-lg flex flex-1">
+      <div className="p-5">
+        <div className="flex flex-col md:flex-row justify-center items-center px-5 lg:px-0">
+          {/* Left side - Image */}
           <div className="hidden md:flex flex-1 justify-center">
-            <div>
-              <img className="w-auto" src={Hospital} alt="Hospital Logo" />
+            <div className="hidden md:flex flex-1 justify-center items-center p-6">
+              <img
+                className="w-full h-auto max-w-md object-cover rounded-r-xl"
+                src={Appointments}
+                alt="Hospital"
+              />
             </div>
           </div>
-          <div className="xl:w-5/12 p-24 sm:p-12">
-            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl border-2 p-6">
-              <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
+
+          <div className="flex justify-center items-center flex-1 p-6 sm:p-12 lg:mt-6">
+            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl border-2 border-gray-300 rounded-lg p-8">
+              <div className="mx-auto flex w-full max-w-md flex-col space-y-12">
                 <div className="flex flex-col items-center justify-center text-center space-y-2">
                   <div className="font-semibold text-3xl">
                     <p>Email Verification</p>
