@@ -48,7 +48,7 @@ const LoginForm = ({ onOtpSent, handleData }) => {
 
   return (
     <section className="container">
-      <div className="container2 border-b-2 flex flex-row gap-9 items-center justify-center">
+      <div className="container border-b-2 flex flex-row gap-9 items-center justify-center">
         <NavLink
           to='/patientLoginpage'
           className={({ isActive }) =>
@@ -69,7 +69,6 @@ const LoginForm = ({ onOtpSent, handleData }) => {
 
       <div className="p-5">
         <div className="flex flex-col md:flex-row justify-center items-center px-5 lg:px-0">
-          {/* Left side - Image */}
           <div className="hidden md:flex flex-1 justify-center">
             <div className="hidden md:flex flex-1 justify-center items-center p-6">
               <img

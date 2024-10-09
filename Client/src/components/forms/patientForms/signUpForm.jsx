@@ -39,7 +39,7 @@ const SignUpForm = ({ onOtpSent, handleData }) => {
 
   return (
     <section className="container mx-auto p-0">
-      <div className="border-b-2 flex flex-row gap-9 items-center justify-center">
+      <div className="container border-b-2 flex flex-row gap-9 items-center justify-center">
         <NavLink
           to='/patientLoginpage'
           className={({ isActive }) =>
