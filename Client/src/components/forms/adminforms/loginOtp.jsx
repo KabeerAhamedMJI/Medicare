@@ -21,7 +21,7 @@ const AdminLoginOtp = ({ emailOrMobile, data }) => {
             if (response.success) {
                 setLoading(false);
                 toast.success("Logged in successfully.");
-                navigate('');
+                navigate("/admin");
             } else {
                 toast.error('OTP has expired or is invalid.');
             }

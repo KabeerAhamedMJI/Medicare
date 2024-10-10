@@ -3,31 +3,7 @@ import Logo from '../../assets/images/Static Images/Logo.png'
 
 const AdminFooter = () => {
   return (
-    <div className="container mx-auto rounded-2xl overflow-hidden mb-6">
-      <footer className="footer bg-gray-200 text-base-content p-10">
-        <nav className='hidden md:flex flex-col'>
-          <h6 className="footer-title">Medicare Services</h6>
-          <a style={{ color: '#223C6F' }} className="link link-hover" href="/find-provider">Consult Online</a>
-          <a style={{ color: '#223C6F' }} className="link link-hover" href="/book-appointment">Book an Appointment</a>
-          <a style={{ color: '#223C6F' }} className="link link-hover" href="/patient-portal">Patient Portal</a>
-          <a style={{ color: '#223C6F' }} className="link link-hover" href="/insurance-info">Insurance Information</a>
-        </nav>
-
-        <nav className=''>
-          <h6 className="footer-title">Hospital</h6>
-          <a style={{ color: '#223C6F' }} className="link link-hover" href="/about-us">About Us</a>
-          <a style={{ color: '#223C6F' }} className="link link-hover" href="/contact">Contact Us</a>
-          <a style={{ color: '#223C6F' }} className="link link-hover" href="/careers">Careers</a>
-          <a style={{ color: '#223C6F' }} className="link link-hover" href="/press">Press</a>
-        </nav>
-        <nav>
-          <h6 className="footer-title">Legal</h6>
-          <a style={{ color: '#223C6F' }} className="link link-hover" href="/terms">Terms of Service</a>
-          <a style={{ color: '#223C6F' }} className="link link-hover" href="/privacy-policy">Privacy Policy</a>
-          <a style={{ color: '#223C6F' }} className="link link-hover" href="/cookie-policy">Cookie Policy</a>
-          <a style={{ color: '#223C6F' }} className="link link-hover" href="/hipaa-compliance">HIPAA Compliance</a>
-        </nav>
-      </footer>
+    <div className="mx-auto overflow-hidden">
       <footer className="footer bg-gray-200 text-base-content border-base-300 border-t px-10 py-4">
         <aside className="grid-flow-col items-center">
           <div>

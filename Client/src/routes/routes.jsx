@@ -13,6 +13,7 @@ import BookAppointment from "../components/patient/bookAppointment";
 import AdminLayout from "../layouts/adminLayout";
 import AdminProtect from "./protectedRoutes/adminProtect";
 import AdminLogin from "../pages/admin/adminLogin";
+import Admindashbord from "../pages/admin/dashbord";
 
 
 export const router = createBrowserRouter([
@@ -86,7 +87,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '',
-                element: <HomePage />
+                element: <Admindashbord />
             }
         ]
     }

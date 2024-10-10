@@ -12,7 +12,6 @@ const darkMode = () => {
 
   return (
 <label className="swap swap-rotate">
-  {/* this hidden checkbox controls the state */}
   <input type="checkbox" onClick={toggleTheme}/>
 
   {/* sun icon */}
