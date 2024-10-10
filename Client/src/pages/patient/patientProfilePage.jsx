@@ -1,5 +1,5 @@
 import React from 'react'
-import PatientProfile from '../../components/cards/patientCard'
+import PatientProfile from '../../components/patient/patientCard'
 
 const patientProfilePage = () => {
   return (

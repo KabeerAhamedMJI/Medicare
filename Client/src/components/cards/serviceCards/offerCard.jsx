@@ -27,7 +27,7 @@ const OfferCard = () => {
     }, [])
 
     return (
-        <section className='container'>
+        <section id="offers"  className='container'>
             <div className='mx-auto'>
                 <h2 className="text-2xl md:text-3xl font-bold text-[#072A6F] text-start md:pl-4 mb-6">Exclusive Offers</h2>
                 <div className='flex flex-col md:flex-row mx-auto p-3 gap-6'>

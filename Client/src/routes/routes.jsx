@@ -10,6 +10,10 @@ import PatientLayout from "../layouts/patientLayout";
 import Servicepage from "../pages/patient/servicepage";
 import PatientProtect from "./protectedRoutes/patientProtect";
 import BookAppointment from "../components/patient/bookAppointment";
+import AdminLayout from "../layouts/adminLayout";
+import AdminProtect from "./protectedRoutes/adminProtect";
+import AdminLogin from "../pages/admin/adminLogin";
+
 
 export const router = createBrowserRouter([
     {
@@ -33,6 +37,10 @@ export const router = createBrowserRouter([
             {
                 path: 'servicePage',
                 element: <Servicepage />
+            },
+            {
+                path: 'login/admin',
+                element: <AdminLogin />
             }
         ]
     },
@@ -63,6 +71,22 @@ export const router = createBrowserRouter([
             {
                 path: 'servicePage',
                 element: <Servicepage />
+            }
+        ]
+    },
+    {
+
+        path: "admin",
+        element: (
+            <AdminProtect>
+                <AdminLayout />
+            </AdminProtect>
+        ),
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: '',
+                element: <HomePage />
             }
         ]
     }
