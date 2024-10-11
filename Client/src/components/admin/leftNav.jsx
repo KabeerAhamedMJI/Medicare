@@ -36,8 +36,8 @@ const LeftNav = () => {
     };
 
     return (
-        <div className="flex">
-            <div className="  left-0 h-screen bg-gray-200 w-[15%] p-4 shadow-lg">
+      
+            <div className="  left-0 h-screen bg-gray-200 p-4 shadow-lg">
                 <nav className="mt-6">
                     <ul className="space-y-4">
                         <li className="flex items-center justify-between cursor-pointer p-3 bg-[#223C6F] text-white rounded hover:bg-[#223C6F]" onClick={() => toggleDropdown('dashboard')}>
@@ -236,7 +236,6 @@ const LeftNav = () => {
                     </ul>
                 </nav>
             </div>
-        </div>
     );
 };
 
