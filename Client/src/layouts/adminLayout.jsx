@@ -5,13 +5,13 @@ import LeftNav from '../components/admin/leftNav';
 
 const AdminLayout = () => {
     return (
-        <div>
+        <div className="flex flex-col h-screen">
             <AdminHeader />
-            <div className="flex flex-row flex-grow">
-                <nav >
+            <div className="flex flex-row flex-grow overflow-hidden">
+                <nav className="sticky top-0 h-full bg-white shadow">
                     <LeftNav />
                 </nav>
-                <main className="flex-grow p-6 bg-gray-50">
+                <main className="flex-grow p-6 bg-gray-50 overflow-auto">
                     <Outlet />
                 </main>
             </div>

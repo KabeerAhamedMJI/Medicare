@@ -4,6 +4,7 @@ import NodeCache from 'node-cache';
 import crypto from 'crypto';
 import { sendOtp } from '../utis/generateOTP.js';
 import { Doctor } from '../models/doctorProfileModel.js';
+import { cloudinaryInstance } from '../config/cloudinaryConfig.js';
 
 const cache = new NodeCache({ stdTTL: 120 });
 
@@ -70,8 +71,13 @@ export const verifyOtpLogin = async (req, res) => {
 
 export const adminProfile = async (req, res, next) => {
     try {
-        const { id } = req.params
-        const adminData = await Doctor.findById({ _id: id, role: 'admin' }).select("-password");
+        const doctor = req.doctor
+        const adminData = await Doctor.findOne({ role: 'admin' }).select("-password");
+
+
+        if(!adminData){
+            return res.status(404).json({ success: false, message: "Doctor data could not fetched." });
+        }
 
         res.json({ success: true, message: "Admin Data Fetched..!", data: adminData });
     } catch (error) {

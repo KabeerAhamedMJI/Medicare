@@ -4,7 +4,7 @@ import { axiosInstance } from "../config/axiosInstance";
 export const AdminLogin = async (data) => {
     try {
         const response = await axiosInstance({
-            url: '/admin/login', 
+            url: '/admin/login',
             method: "POST",
             data,
             withCredentials: true
@@ -29,6 +29,8 @@ export const AdminloginOtp = async (data) => {
         console.log(error);
     }
 };
+
+
 
 
 // export const updatePatient = async (id, updatedData) => {

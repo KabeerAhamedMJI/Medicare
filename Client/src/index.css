@@ -13,7 +13,6 @@
     top: 0;
     z-index: 100;
   } */
-   
   .container{
     max-width: 92%;
     margin-left: auto;
@@ -118,6 +117,12 @@
 
 .dropdown-no-shadow {
   box-shadow: none !important;
+}
+.text-shadow-lg {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.icon-shadow {
+filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
 }
 
   @media (min-width: 768px) {
