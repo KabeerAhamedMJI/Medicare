@@ -13,11 +13,26 @@ export const bookAppointment = async (data, patientId, DoctorId, DepartmentId) =
             withCredentials: true
         });
         return response?.data;
-        
+
     } catch (error) {
         console.error('Error booking appointment:', error);
     }
 };
+
+
+export const getAllAppointments = async () => {
+
+    try {
+        const response = await axiosInstance({
+            url: `/appointment/appointmentlist`,
+            method: "GET",
+            withCredentials: true
+        })
+        return response?.data;
+    } catch (error) {
+        console.error('Error fetching appointments:', error);
+    }
+}
 
 // export const getAppointments = async (patientId) => {
 //     try {

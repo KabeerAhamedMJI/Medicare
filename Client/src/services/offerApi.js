@@ -1,11 +1,12 @@
 import { axiosInstance } from "../config/axiosInstance"
 
-export const offerList = async () => {
+export const getAllOffers = async () => {
     try {
 
         const response = await axiosInstance({
-            url: `/symtoms/symtomslist`,
+            url: `/offer/offerlist`,
             method: "GET",
+            withCredentials: true
         })
         return response?.data
     } catch (error) {

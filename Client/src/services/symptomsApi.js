@@ -1,14 +1,14 @@
 import { axiosInstance } from "../config/axiosInstance"
 
-// export const symptomsList = async () => {
-//     try {
+export const symptomsLists = async () => {
+    try {
 
-//         const response = await axiosInstance({
-//             url: `/symtoms/symtomslist`,
-//             method: "GET",
-//         })
-//         return response?.data
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
+        const response = await axiosInstance({
+            url: `/symtoms/symtomslist`,
+            method: "GET",
+        })
+        return response?.data
+    } catch (error) {
+        console.log(error)
+    }
+}

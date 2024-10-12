@@ -117,3 +117,17 @@ export const patientLogout = async () => {
         console.error("Logout failed:", error);
     }
 };
+
+
+export const getAllPatients = async () => {
+    try {
+        const response = await axiosInstance({
+            url: '/patient/patientlist',
+            method: "GET",
+            withCredentials: true,
+        });
+        return response?.data;
+    } catch (error) {
+        console.error("Faild to fetch patients list:", error);
+    }
+}
