@@ -14,6 +14,7 @@ import AdminLayout from "../layouts/adminLayout";
 import AdminProtect from "./protectedRoutes/adminProtect";
 import AdminLogin from "../pages/admin/adminLogin";
 import Admindashbord from "../pages/admin/dashbord";
+import AdminAppointmentPage from "../pages/admin/appointmentPage";
 
 
 export const router = createBrowserRouter([
@@ -88,6 +89,10 @@ export const router = createBrowserRouter([
             {
                 path: '',
                 element: <Admindashbord />
+            },
+            {
+                path: 'appointmentPage',
+                element: <AdminAppointmentPage />
             }
         ]
     }

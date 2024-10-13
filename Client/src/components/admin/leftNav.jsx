@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { GiSettingsKnobs } from 'react-icons/gi';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { MdOutlineSpaceDashboard } from 'react-icons/md';
 import { FaUserDoctor } from "react-icons/fa6";
@@ -13,6 +12,7 @@ import { BsBuildingFillAdd } from "react-icons/bs";
 import { BsVirus } from "react-icons/bs";
 import { MdBloodtype } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
 const LeftNav = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState({
@@ -38,15 +38,19 @@ const LeftNav = () => {
         <div className="left-0 h-screen bg-gray-200 p-4 shadow-lg">
             <nav className="mt-6">
                 <ul className="space-y-4">
-                    <li className="flex items-center justify-between cursor-pointer p-3 bg-[#223C6F] text-white rounded hover:bg-[#223C6F]" onClick={() => toggleDropdown('dashboard')}>
-                        <div className="flex items-center">
-                            <MdOutlineSpaceDashboard className="mr-3" style={{ fontSize: '22px' }} />
-                            <span className="hidden md:flex">Dashboard</span>
-                        </div>
-                         <FaMinus />
+                    <li className="flex items-center justify-between cursor-pointer p-3 bg-[#223C6F] text-white rounded hover:bg-[#223C6F]">
+                        <Link
+                            to="/admin" 
+                            className="flex items-center justify-between w-full"
+                            onClick={() => toggleDropdown('dashboard')}
+                        >
+                            <div className="flex items-center">
+                                <MdOutlineSpaceDashboard className="mr-3" style={{ fontSize: '22px' }} />
+                                <span className="hidden md:flex">Dashboard</span>
+                            </div>
+                            <FaMinus />
+                        </Link>
                     </li>
-                   
-
                     <li className="flex items-center justify-between cursor-pointer p-3 bg-[#223C6F] text-white rounded" onClick={() => toggleDropdown('appointments')}>
                         <div className="flex items-center">
                             <RiPagesLine className="mr-3" style={{ fontSize: '22px' }} />
@@ -57,13 +61,22 @@ const LeftNav = () => {
                     {isDropdownOpen.appointments && (
                         <ul className="mt-2 space-y-2">
                             <li className="flex items-center p-2 cursor-pointer text-[#223C6F] hover:bg-[#223C6F] hover:text-white rounded">
-                                <GrView className="mr-2" style={{ fontSize: '20px' }} /> <span className="hidden md:flex">View</span>
+                                <Link to="/admin/appointmentPage" className="flex items-center">
+                                    <GrView className="mr-2" style={{ fontSize: '20px' }} />
+                                    <span className="hidden md:flex">View</span>
+                                </Link>
                             </li>
                             <li className="flex items-center p-2 cursor-pointer text-[#223C6F] hover:bg-[#223C6F] hover:text-white rounded">
-                                <MdUpdate className="mr-2" style={{ fontSize: '20px' }} /> <span className="hidden md:flex">Update</span>
+                                <Link to="/update" className="flex items-center">
+                                    <MdUpdate className="mr-2" style={{ fontSize: '20px' }} />
+                                    <span className="hidden md:flex">Update</span>
+                                </Link>
                             </li>
                             <li className="flex items-center p-2 cursor-pointer text-[#223C6F] hover:bg-[#223C6F] hover:text-white rounded">
-                                <MdDeleteForever className="mr-2" style={{ fontSize: '21px' }} /> <span className="hidden md:flex">Delete</span>
+                                <Link to="/delete" className="flex items-center">
+                                    <MdDeleteForever className="mr-2" style={{ fontSize: '21px' }} />
+                                    <span className="hidden md:flex">Delete</span>
+                                </Link>
                             </li>
                         </ul>
                     )}
