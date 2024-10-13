@@ -7,9 +7,7 @@ import { getAllAppointments } from '../../../services/appointmentApti';
 import { getAllPatients } from '../../../services/patientApi';
 import { getDoctorsList } from '../../../services/doctorApi';
 import { departmentList } from '../../../services/doctorApi';
-import { PieChart, Pie, Tooltip, ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts';
-
-
+import { PieChart, Pie, Tooltip, ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
 
 const MainDashboard = () => {
 
@@ -68,24 +66,23 @@ const MainDashboard = () => {
          name: departmentName,
          value: departmentCount[departmentName]
       }));
-
       setDepartmentAppointments(departmentData);
    };
 
    const getDoctorsByDepartment = (departments) => {
       const departmentDoctors = departments.map(department => {
-        console.log('Department:', department);  
-    
-        return {
-          name: department.name,
-          Doctors: department.doctors.length
-        };
+         console.log('Department:', department);
+
+         return {
+            name: department.name,
+            Doctors: department.doctors.length
+         };
       });
 
-      console.log('Department Doctors:', departmentDoctors); 
+      console.log('Department Doctors:', departmentDoctors);
       setDepartmentDoctorsData(departmentDoctors);
-    };
-   
+   };
+
 
    useEffect(() => {
       allAppointments();
@@ -142,7 +139,7 @@ const MainDashboard = () => {
          </div>
          <div className='flex flex-col md:flex-row items-center justify-center mt-6 p-4 gap-12'>
             <div className=' bg-gray-200 rounded-lg p-3'>
-               <h2 className='text-lg font-bold  md:text-xl p-2 text-[#223C6F] text-shadow-lg text-[#223C6F]'>Appointments by Department</h2>
+               <h2 className='text-lg font-bold  md:text-xl p-2 text-[#223C6F] text-shadow-lg text-[#223C6F]'>Department-wise Appointments</h2>
                <PieChart width={520} height={300}>
                   <Pie
                      dataKey="value"
@@ -158,26 +155,26 @@ const MainDashboard = () => {
                </PieChart>
             </div>
             <div className=' bg-gray-200 rounded-lg p-3'>
-               <h2 className='text-lg font-bold  md:text-xl p-2 text-[#223C6F] text-shadow-lg text-[#223C6F]'>Doctors by Department</h2>
-                  <ComposedChart
-                     width={520}
-                     height={300}
-                     data={departmentDoctorsData}
-                     margin={{
-                        top: 20,
-                        right: 20,
-                        bottom: 20,
-                        left: 20,
-                     }}
-                  >
-                     <CartesianGrid stroke="#f5f5f5" />
-                     <XAxis dataKey="name" scale="band" />
-                     <YAxis />
-                     <Tooltip />
-                     <Legend />
-                     <Bar dataKey="Doctors" barSize={20} fill="#FFB74D" />
-                     <Line type="monotone" dataKey="Doctors" stroke="#223C6F" />
-                  </ComposedChart>
+               <h2 className='text-lg font-bold  md:text-xl p-2 text-[#223C6F] text-shadow-lg text-[#223C6F]'>Doctors in Each Department  </h2>
+               <ComposedChart
+                  width={520}
+                  height={300}
+                  data={departmentDoctorsData}
+                  margin={{
+                     top: 20,
+                     right: 20,
+                     bottom: 20,
+                     left: 20,
+                  }}
+               >
+                  <CartesianGrid stroke="#f5f5f5" />
+                  <XAxis dataKey="name" scale="band" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="Doctors" barSize={20} fill="#FFB74D" />
+                  <Line type="monotone" dataKey="Doctors" stroke="#223C6F" />
+               </ComposedChart>
             </div>
          </div>
       </div>

@@ -48,46 +48,6 @@ export const doctorCreate = async (req, res, next) => {
 
 
 
-
-// export const doctorCreate = async (req, res, next) => {
-//     try {
-//         const { doctorName, email, profilePic, password, specialization, contactNumber, department } = req.body;
-
-//         const uploadResult = await cloudinaryInstance.uploader.upload(req.file.path).catch((error) => {
-//             console.log(error);
-//         });
-
-//         console.log(uploadResult);
-
-//         if (!doctorName || !email || !password || !specialization || !contactNumber) {
-//             return res.status(400).json({ success: false, message: "All fields are required" });
-//         }
-
-//         const hashedPassword = bcrypt.hashSync(password, 10);
-
-//         const newDoctor = new Doctor({
-//             doctorName,
-//             profilePic: uploadResult?.secure_url || profilePic,
-//             email,
-//             password: hashedPassword,
-//             specialization,
-//             contactNumber,
-//             department,
-//             role: "doctor"
-//         });
-
-//         await newDoctor.save();
-
-//         const token = generateToken(email, 'Doctor');
-//         res.cookie('token', token);
-//         res.json({ success: true, message: "Doctor Created Successfully" });
-
-//     } catch (error) {
-//         res.status(error.status || 500).json({ message: error.message || 'Internal server error' });
-//     }
-// };
-
-
 export const verifyOtpSignup = async (req, res) => {
 
     try {

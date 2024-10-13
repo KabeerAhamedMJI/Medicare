@@ -43,18 +43,9 @@ const LeftNav = () => {
                             <MdOutlineSpaceDashboard className="mr-3" style={{ fontSize: '22px' }} />
                             <span className="hidden md:flex">Dashboard</span>
                         </div>
-                        <span className="hidden md:flex">{isDropdownOpen.dashboard ? <FaMinus /> : <FaPlus />}</span>
+                         <FaMinus />
                     </li>
-                    {isDropdownOpen.dashboard && (
-                        <ul className="mt-2 space-y-2">
-                            <li className="flex items-center p-2 cursor-pointer text-[#223C6F] hover:bg-[#223C6F] hover:text-white rounded">
-                                <FaUserDoctor className="mr-2" style={{ fontSize: '20px' }} /> <span className="hidden md:flex">Doctor Dashboard</span>
-                            </li>
-                            <li className="flex items-center p-2 cursor-pointer text-[#223C6F] hover:bg-[#223C6F] hover:text-white rounded">
-                                <FaUser className="mr-2" style={{ fontSize: '18px' }} /> <span className="hidden md:flex">Patient Dashboard</span>
-                            </li>
-                        </ul>
-                    )}
+                   
 
                     <li className="flex items-center justify-between cursor-pointer p-3 bg-[#223C6F] text-white rounded" onClick={() => toggleDropdown('appointments')}>
                         <div className="flex items-center">
