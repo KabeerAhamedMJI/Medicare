@@ -102,7 +102,10 @@ const MainDashboard = () => {
                      <RiPagesLine className="mr-2 text-white p-1 icon-shadow" style={{ fontSize: '40px' }} />
                      <h3 className='text-sm sm:text-base md:text-lg lg:text-xl text-[#223C6F] font-semibold text-center text-shadow-lg'>Appointments</h3>
                   </div>
+                  <div className='flex flex-row items-center gap-2 text-[#223c6f]'>
                   <h2 className='text-4xl text-[#223c6f] font-bold ml-12 text-shadow-lg'>{appointments.length}</h2>
+                  <span className='text-base items-center justify-center text-shadow-lg'>In 8 Departments</span>
+                  </div>
                </div>
                <div className='relative w-full bg-[#FFB74D] rounded-xl p-4 flex flex-col items-start'>
                   <div className='flex flex-row items-center justify-center'>

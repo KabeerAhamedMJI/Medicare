@@ -48,7 +48,7 @@ export const bookAppointment = async (req, res, next) => {
 
 export const getAppointmentList = async (req, res) => {
     try {
-        const appointments = await Appointment.find();
+        const appointments = await Appointment.find().populate('patient').populate('doctor').populate('department').exec();
 
         if (!appointments) {
             return res.status(404).json({ success: false, message: 'Appointments data could not fetch' });
