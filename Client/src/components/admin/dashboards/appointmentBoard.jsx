@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { CiMobile3 } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 import { getAllAppointments } from '../../../services/appointmentApti';
+
 
 const appointmentBoard = () => {
   const [appointments, setAppointments] = useState([])
@@ -84,14 +86,19 @@ const appointmentBoard = () => {
                     </div>
                   </td>
                   <td className="text-center border-dotted border-white border">{appointment.department?.name || "Unknown"}</td>
-                  <td className="text-center border-dotted border-white border">{appointment.doctor?.doctorName || "Unknown"}</td>
+                  <td className="text-center border-dotted border-white border">{appointment.doctor?.doctorName || "Any Available Doctor"}</td>
                   <td className="text-center border-dotted border-white border">
-                    <div className="flex flex-col">
+                    <div className="flex flex-col gap-2">
                       <span>{formatTime(appointment.time)}</span>
                       <span>{formatDate(appointment.appointmentDate)}</span>
                     </div>
                   </td>
-                  <td className="text-center border-dotted border-white border">{appointment.phoneNumber}</td>
+                  <td className="text-center border-dotted border-white border">
+                    <div className='flex flex-row items-center justify-center gap-2'>
+                    <CiMobile3 className='text-2xl text--[#223C6F] font-bold'/>
+                      <span>{appointment.phoneNumber}</span>
+                    </div>
+                  </td>
                   <td
                     className={`text-center border-dotted border-white border font-bold ${appointment.status === 'Cancelled' ? 'text-red-600' :
                       appointment.status === 'Active' ? 'text-green-600' :

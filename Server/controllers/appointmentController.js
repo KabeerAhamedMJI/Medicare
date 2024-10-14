@@ -81,7 +81,7 @@ export const updateAppointmentStatus = async (req, res, next) => {
             return res.status(400).json({ success: false, message: "Appointment ID and status are required" });
         }
 
-        const validStatuses = ["active", "cancelled", "completed"];
+        const validStatuses = ["Active", "Cancelled", "Completed"];
         if (!validStatuses.includes(status)) {
             return res.status(400).json({ success: false, message: "Invalid status value" });
         }
