@@ -75,7 +75,7 @@ export const getSingleAppointment = async (req, res, next) => {
 
 export const updateAppointmentStatus = async (req, res, next) => {
     try {
-        const { appointmentId, status } = req.body;
+        const { appointmentId, status, appointmentDate, time, patientId, doctorId, departmentId, description, phoneNumber } = req.body;
 
         if (!appointmentId || !status) {
             return res.status(400).json({ success: false, message: "Appointment ID and status are required" });
@@ -86,7 +86,7 @@ export const updateAppointmentStatus = async (req, res, next) => {
             return res.status(400).json({ success: false, message: "Invalid status value" });
         }
 
-        const updatedAppointment = await Appointment.findByIdAndUpdate(appointmentId, { status }, { new: true });
+        const updatedAppointment = await Appointment.findByIdAndUpdate(appointmentId, { status, appointmentDate, time, patientId, doctorId, departmentId, description, phoneNumber }, { new: true });
 
         if (!updatedAppointment) {
             return res.status(404).json({ success: false, message: "Appointment not found" });
