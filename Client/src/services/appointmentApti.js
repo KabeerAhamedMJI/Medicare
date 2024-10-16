@@ -37,7 +37,7 @@ export const getAllAppointments = async () => {
 export const updatingAppointment = async (id, data) => {
     try {
         const response = await axiosInstance({
-            url: `/appointment/updateAppointment/${id}`,
+            url: `/appointment/updateAppointment/${id}`,  
             method: "PUT",
             data: data, 
             withCredentials: true
@@ -47,7 +47,5 @@ export const updatingAppointment = async (id, data) => {
         console.error('Error updating appointment:', error);
     }
 };
-
-
 
 export default axiosInstance;

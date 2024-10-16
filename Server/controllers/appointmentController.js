@@ -77,7 +77,7 @@ export const updateAppointmentStatus = async (req, res, next) => {
     try {
         const { appointmentId, status } = req.body;
 
-        if (!id || !status) {
+        if (!appointmentId || !status) {
             return res.status(400).json({ success: false, message: "Appointment ID and status are required" });
         }
 
