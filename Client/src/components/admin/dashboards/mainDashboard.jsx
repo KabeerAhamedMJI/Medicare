@@ -17,7 +17,7 @@ const MainDashboard = () => {
    const [doctors, setDoctors] = useState([]);
    const [departmentAppointments, setDepartmentAppointments] = useState([]);
    const [departmentDoctorsData, setDepartmentDoctorsData] = useState([]);
-
+ 
 
    const allAppointments = async () => {
       const response = await getAllAppointments();

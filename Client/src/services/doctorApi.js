@@ -5,8 +5,9 @@ export const departmentList = async () => {
 
         const response = await axiosInstance({
             url: `/department/departmentList`,
-            method: "GET",
+            method: "GET"
         })
+        console.log(response)
         return response?.data
     } catch (error) {
         console.log(error)

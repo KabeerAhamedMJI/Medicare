@@ -11,10 +11,11 @@ const appointmentBoard = () => {
   const [appointments, setAppointments] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [status, setChangeStatus] = useState('');
 
   const showAllAppointments = async () => {
     const response = await getAllAppointments();
-    console.log(response.data);
+    console.log(response);
     setAppointments(response.data);
   }
 
@@ -55,13 +56,18 @@ const appointmentBoard = () => {
 
     setValue("department", appointment.department?.name || '');
     setValue("phoneNumber", appointment.phoneNumber);
+    setValue("doctor", appointment.doctor?.doctorName);
     setValue("appointmentDate", formattedDate);
     setValue("time", appointment.time);
     setValue("description", appointment.description || '');
-    setValue("status",appointment.status)
-    
-
+    setValue("status", appointment.status);
   };
+
+  const handleChangeStatus = (e) => {
+    setChangeStatus(e.target.value);
+  };
+
+
   const handleFormSubmit = (data) => {
 
     console.log("Form Data:", data);
@@ -138,7 +144,7 @@ const appointmentBoard = () => {
                     {appointment.status}
                   </td>
                   <td className="text-center border-dotted border-white border">
-                    <Link onClick={(e) => {e.preventDefault(); handleEditClick(appointment)} }>
+                    <Link onClick={(e) => { e.preventDefault(); handleEditClick(appointment) }}>
                       <FaRegEdit className="text-xl font-bold text-purple-600 mx-auto" />
                     </Link>
                   </td>
@@ -156,9 +162,9 @@ const appointmentBoard = () => {
               <div className="bg-white w-full max-w-lg p-8 rounded-lg shadow-lg relative">
                 <div className='flex flex-row justify-between'>
                   <h2 className="text-xl font-bold text-center mb-4 text-blue-900">Update Appointment</h2>
-                  <IoCloseSharp className='text-3xl text-blue-800 hover:bg-blue-800 rounded-full hover:text-white' onClick={() =>  setOpenPopup(false)} />
+                  <IoCloseSharp className='text-3xl text-blue-800 hover:bg-blue-800 rounded-full hover:text-white' onClick={() => setOpenPopup(false)} />
                 </div>
-                <form onSubmit={handleSubmit()} className="space-y-3">
+                <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-3">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="form-control">
                       <label className="label">
@@ -204,21 +210,57 @@ const appointmentBoard = () => {
                       />
                     </div>
                   </div>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="label">
+                        <span className="label-text text-blue-800 text-sm">Doctor</span>
+                      </label>
+                      {selectedAppointment.doctor?.doctorName ? (
+                        <div className="p-3 rounded-lg bg-gray-200 text-blue-900">
+                          {selectedAppointment.doctor?.doctorName}
+                        </div>
+                      ) : (
+                        <select className="w-full p-3.5 rounded-lg shadow-sm bg-white text-sm border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                          {appointments.department?.doctors.map((doctor, index) => (
+                            <option key={index} value={doctor.doctorName}>
+                              {doctor.doctorName}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                    </div>
+                    <div>
+                      <label className="label">
+                        <span className="label-text text-[#223C6F] text-sm">Change Status</span>
+                      </label>
+                      <div className="rounded-lg bg-[#223C6F] text-[#223C6F]">
+                        <select
+                          value={status}
+                          onChange={handleChangeStatus}
+                          className="w-full p-3.5 rounded-lg shadow-sm bg-[#223C6F] text-white text-sm border border-gray-300 focus:ring-[#223C6F] focus:outline-none"
+                        >
+                          <option value="Active">Active</option>
+                          <option value="Cancelled">Cancelled</option>
+                          <option value="Completed">Completed</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text text-blue-800 text-sm">Description</span>
+                      <span className="label-text text-[#223C6F] text-sm">Description</span>
                     </label>
                     <textarea
                       {...register("description")}
                       placeholder="Tell us your symptom or health problem"
                       defaultValue={selectedAppointment.description}
-                      className="w-full p-3 rounded-lg shadow-sm bg-white text-sm border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      className="w-full p-3 rounded-lg shadow-sm bg-white text-sm border border-gray-300 focus:ring-2 focus:ring-[#223C6F] focus:outline-none"
                     ></textarea>
                   </div>
                   <div className="form-control mt-3">
                     <button
                       type="submit"
-                      className="w-full p-3 text-white bg-blue-900 rounded-lg shadow-sm hover:bg-blue-800 transition-colors"
+                      className="w-full p-3 text-white bg-[#223C6F] rounded-lg shadow-sm hover:bg-[#223C6F]transition-colors"
                     >Save</button>
                   </div>
                 </form>

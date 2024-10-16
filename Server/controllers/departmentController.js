@@ -33,7 +33,7 @@ export const createDepartment = async (req, res, next) => {
 
 export const getDepartmentList = async (req, res, next) => {
     try {
-        const departments = await Department.find();
+        const departments = await Department.find().populate('doctors');
         if (!departments) {
             return res.status(404).json({ success: false, message: 'Departments data could not fetch' });
         }

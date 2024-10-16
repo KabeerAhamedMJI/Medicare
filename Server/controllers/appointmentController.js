@@ -5,15 +5,15 @@ export const bookAppointment = async (req, res, next) => {
     try {
         const { appointmentDate, time, patientId, doctorId, departmentId, description, phoneNumber } = req.body;
 
-        if (!appointmentDate || !time ) {
+        if (!appointmentDate || !time) {
             return res.status(400).json({ success: false, message: "All fields are required" });
         }
 
         const existingAppointment = await Appointment.findOne({
-            appointmentDate, 
-            time, 
-            doctor: doctorId, 
-            patient: patientId, 
+            appointmentDate,
+            time,
+            doctor: doctorId,
+            patient: patientId,
             department: departmentId
         });
 
@@ -23,7 +23,7 @@ export const bookAppointment = async (req, res, next) => {
 
         const newAppointment = new Appointment({
             patient: patientId,
-            department: departmentId, 
+            department: departmentId,
             doctor: doctorId || null,
             phoneNumber,
             appointmentDate,
@@ -31,12 +31,12 @@ export const bookAppointment = async (req, res, next) => {
             description,
             status: "Active",
         });
-        
+
         await newAppointment.save();
 
         return res.json({
-            success: true, 
-            message: "Appointment booked successfully", 
+            success: true,
+            message: "Appointment booked successfully",
             data: newAppointment
         });
 
@@ -103,10 +103,10 @@ export const getOnePatientAppointments = async (req, res, next) => {
     const patientId = req.params.patientId;
 
     try {
-        const appointments = await Appointment.find({ patient: patientId }).populate('doctor').populate('patient').populate('department');  
+        const appointments = await Appointment.find({ patient: patientId }).populate('doctor').populate('patient').populate('department');
 
         console.log(appointments);
-        if (!appointments) {  
+        if (!appointments) {
             return res.status(404).json({ success: false, message: "Appointments not found" });
         }
         res.json({ success: true, message: "Appointments fetched successfully", data: appointments });

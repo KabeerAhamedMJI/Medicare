@@ -66,18 +66,6 @@ const LeftNav = () => {
                                     <span className="hidden md:flex">View</span>
                                 </Link>
                             </li>
-                            <li className="flex items-center p-2 cursor-pointer text-[#223C6F] hover:bg-[#223C6F] hover:text-white rounded">
-                                <Link to="/update" className="flex items-center">
-                                    <MdUpdate className="mr-2" style={{ fontSize: '20px' }} />
-                                    <span className="hidden md:flex">Update</span>
-                                </Link>
-                            </li>
-                            <li className="flex items-center p-2 cursor-pointer text-[#223C6F] hover:bg-[#223C6F] hover:text-white rounded">
-                                <Link to="/delete" className="flex items-center">
-                                    <MdDeleteForever className="mr-2" style={{ fontSize: '21px' }} />
-                                    <span className="hidden md:flex">Delete</span>
-                                </Link>
-                            </li>
                         </ul>
                     )}
 
