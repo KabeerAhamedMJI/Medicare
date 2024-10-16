@@ -34,18 +34,20 @@ export const getAllAppointments = async () => {
     }
 }
 
-// export const getAppointments = async (patientId) => {
-//     try {
-//         const response = await axiosInstance({
-//             url: `/appointment/appointments/${patientId}`, 
-//             method: 'GET',
-//             withCredentials: true, 
-//         });
-//         return response?.data; 
-//     } catch (error) {
-//         console.error('Failed to fetch Appointment:', error.message);
-//         return { success: false, message: error.response?.data?.message || 'Something went wrong' };
-//     }
-// };
+export const updatingAppointment = async (id, data) => {
+    try {
+        const response = await axiosInstance({
+            url: `/appointment/updateAppointment/${id}`,
+            method: "PUT",
+            data: data, 
+            withCredentials: true
+        });
+        return response?.data; 
+    } catch (error) {
+        console.error('Error updating appointment:', error);
+    }
+};
+
+
 
 export default axiosInstance;

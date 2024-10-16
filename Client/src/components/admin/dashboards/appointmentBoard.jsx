@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { getAllAppointments } from '../../../services/appointmentApti';
 import { useForm } from "react-hook-form";
 import { IoCloseSharp } from "react-icons/io5";
+import { updatingAppointment } from '../../../services/appointmentApti';
+import toast from 'react-hot-toast';
 
 const appointmentBoard = () => {
   const [appointments, setAppointments] = useState([]);
@@ -60,19 +62,41 @@ const appointmentBoard = () => {
     setValue("appointmentDate", formattedDate);
     setValue("time", appointment.time);
     setValue("description", appointment.description || '');
-    setValue("status", appointment.status);
+
+    setChangeStatus(appointment.status);
   };
+
 
   const handleChangeStatus = (e) => {
     setChangeStatus(e.target.value);
   };
 
 
-  const handleFormSubmit = (data) => {
+  const handleFormSubmit = async (data) => {
+    const updatedAppointment = {
+      appointmentId: selectedAppointment._id,  
+      ...data,
+      status,
+    };
 
-    console.log("Form Data:", data);
+    try {
+      const response = await updatingAppointment(updatedAppointment.appointmentId, updatedAppointment,selectedAppointment._id);
 
+      console.log(selectedAppointment._id)
+
+      if (response.success) {
+          toast.success("Appointment updated successfully.");
+          setOpenPopup(false);
+          showAllAppointments();
+      } else {
+          toast.error('Error updating appointment.');
+      }
+  } catch (error) {
+      console.log(error);
+      toast.error('Error updating appointment.');
+  }
   };
+
   return (
     <div>
       <h2 className='text-xl font-bold md:text-3xl p-2 text-[#223C6F]'>All Appointments</h2>
@@ -221,7 +245,7 @@ const appointmentBoard = () => {
                         </div>
                       ) : (
                         <select className="w-full p-3.5 rounded-lg shadow-sm bg-white text-sm border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                          {appointments.department?.doctors.map((doctor, index) => (
+                          {selectedAppointment.department?.doctors.map((doctor, index) => (
                             <option key={index} value={doctor.doctorName}>
                               {doctor.doctorName}
                             </option>

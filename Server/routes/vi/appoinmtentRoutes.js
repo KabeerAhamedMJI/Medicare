@@ -10,7 +10,7 @@ Router.post('/bookAppointment',patientProtect, bookAppointment);
 Router.get("/singleAppointment/:id", patientProtect, getSingleAppointment );
 Router.get("/appointmentlist",doctorProtect, getAppointmentList);
 Router.get('/appointments/:patientId',patientProtect, getOnePatientAppointments);
-Router.put('/updateAppointment/:id',  updateAppointmentStatus);
+Router.put('/updateAppointment/:id', adminProtect, updateAppointmentStatus);
 Router.delete('/deleteAppointment/:id', adminProtect, deleteAppointment);
 
 
