@@ -3,6 +3,7 @@ import { axiosInstance } from '../../../config/axiosInstance';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setdepartment } from '../../../redux/features/departmentSlice';
+import { getDoctorsList } from '../../../services/doctorApi';
 
 export const DoctorsListCard = () => {
     const [departments, setDepartments] = useState([]);
@@ -10,7 +11,6 @@ export const DoctorsListCard = () => {
     const [doctors, setDoctors] = useState([]);
     const [activeDepartment, setActiveDepartment] = useState(null);
     const departmentses = useSelector((state) => state.department.department);
-    console.log('Redux departments state:', departmentses);
     const dispatch = useDispatch();
 
     const fetchDepartments = async () => {
@@ -21,14 +21,12 @@ export const DoctorsListCard = () => {
             });
 
             const departmentData = response?.data?.data || [];
-            console.log('Department Data before dispatch:', departmentData);
             dispatch(setdepartment(departmentData));
             setDepartments(departmentData);
 
             if (departmentData.length > 0) {
                 setActiveTab(departmentData[0]._id);
             }
-            console.log('Departments response ===', response.data);
         } catch (error) {
             console.log('Error fetching departments: ', error);
         }
@@ -40,25 +38,36 @@ export const DoctorsListCard = () => {
     
     useEffect(() => {
         if (departmentses.length > 0) {
-            console.log('Departments from Redux state:', departmentses);
         }
     }, [departmentses]);
     
 
     const fetchDoctorsDetails = async (doctorIds) => {
         try {
-            const response = await axiosInstance({
-                url: `/doctor/doctorlist`,
-                method: 'GET',
-            });
-            const allDoctors = response?.data?.data || [];
-            const filteredDoctors = allDoctors.filter(doctor => doctorIds.includes(doctor._id));
+            // Fetch the list of all doctors
+            const response = await getDoctorsList();
+            console.log(response.data);  // Print the fetched data
+    
+            // If response data exists, use it; otherwise, use an empty array
+            const allDoctors = response?.data || [];
+            console.log(allDoctors);  // Print the list of all doctors
+    
+            // Extract only the _id from doctorIds to create an array of IDs
+            const doctorIdsArray = doctorIds.map(id => id._id);
+            console.log(doctorIdsArray);  // Print the array of doctor IDs
+    
+            // Filter the doctors that exist in both allDoctors and doctorIdsArray
+            const filteredDoctors = allDoctors.filter(doctor => doctorIdsArray.includes(doctor._id));
+    
+            // Update the doctors state with the filtered list
             setDoctors(filteredDoctors);
-            console.log('Doctors response ===', response.data);
         } catch (error) {
+            // Catch and log any error that happens during the process
             console.log('Error fetching doctors: ', error);
         }
     };
+    
+    
 
     useEffect(() => {
         if (activeTab) {
@@ -68,7 +77,7 @@ export const DoctorsListCard = () => {
                 fetchDoctorsDetails(foundDepartment.doctors);
             }
         }
-    }, [activeTab, departments]);
+    }, [activeTab, departments, doctors]);
 
     const handleTabChange = (id) => () => setActiveTab(id);
 

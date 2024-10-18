@@ -7,11 +7,13 @@ import { getAllAppointments } from '../../../services/appointmentApti';
 import { useForm } from "react-hook-form";
 import { IoCloseSharp } from "react-icons/io5";
 import { updatingAppointment } from '../../../services/appointmentApti';
+import { deleteAppointment } from '../../../services/appointmentApti';
 import toast from 'react-hot-toast';
 
 const appointmentBoard = () => {
   const [appointments, setAppointments] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
+  const [delPopup, setDelPopup] = useState(true)
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [status, setChangeStatus] = useState('');
 
@@ -50,6 +52,15 @@ const appointmentBoard = () => {
     setValue
   } = useForm();
 
+  const handleDelete = () => {
+    setDelPopup(false)
+  };
+
+  const openModal = (id) => {
+    setSelectedAppointment(id)
+    setDelPopup(true);
+  };
+
   const handleEditClick = (appointment) => {
     setSelectedAppointment(appointment);
     setOpenPopup(true);
@@ -74,28 +85,42 @@ const appointmentBoard = () => {
 
   const handleFormSubmit = async (data) => {
     const updatedAppointment = {
-      appointmentId: selectedAppointment._id,  
+      appointmentId: selectedAppointment._id,
       ...data,
       status,
     };
 
     try {
-      const response = await updatingAppointment(updatedAppointment.appointmentId, updatedAppointment,selectedAppointment._id);
-
-      console.log(selectedAppointment._id)
+      const response = await updatingAppointment(updatedAppointment.appointmentId, updatedAppointment, selectedAppointment._id);
 
       if (response.success) {
-          toast.success("Appointment updated successfully.");
-          setOpenPopup(false);
-          showAllAppointments();
+        toast.success("Appointment updated successfully.");
+        setOpenPopup(false);
+        showAllAppointments();
       } else {
-          toast.error('Error updating appointment.');
+        toast.error('Error updating appointment.');
       }
-  } catch (error) {
+    } catch (error) {
       console.log(error);
       toast.error('Error updating appointment.');
-  }
+    }
   };
+
+  const delAppointment = async () => {
+    try {
+      const response = await deleteAppointment(selectedAppointment._id);
+      if (response.success) {
+        setDelPopup(false);
+        toast.success("Appointment deleted successfully.");
+        showAllAppointments();
+      } else {
+        toast.error("Error deleting appointment.");
+      }
+    } catch (error) {
+      toast.error("Error deleting appointment.");
+    }
+  };
+ 
 
   return (
     <div>
@@ -173,9 +198,9 @@ const appointmentBoard = () => {
                     </Link>
                   </td>
                   <td className="text-center border-dotted border-white border">
-                    <Link to="/delete">
+                    <a onClick={() => openModal(appointment)} href="#my_modal_8">
                       <RiDeleteBin6Line className="text-xl font-bold text-red-500 mx-auto" />
-                    </Link>
+                    </a>
                   </td>
                 </tr>
               ))}
@@ -292,6 +317,26 @@ const appointmentBoard = () => {
             </div>
           )}
         </div>
+        {delPopup && (
+        <div className="modal" role="dialog" id="my_modal_8">
+          <div className="modal-box p-6">
+            <div className="text-center">
+              <RiDeleteBin6Line className="text-4xl text-red-500 mb-3 mx-auto" />
+              <p className="text-lg font-medium text-gray-800 mb-4">
+                Are you sure you want to delete this appointment?
+              </p>
+            </div>
+            <div className="modal-action justify-center space-x-4">
+              <button onClick={delAppointment} className="px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 focus:outline-none">
+                Delete
+              </button>
+              <button onClick={handleDelete} className="px-4 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 focus:outline-none">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       </div>
     </div>
   );

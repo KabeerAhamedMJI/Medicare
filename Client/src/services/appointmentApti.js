@@ -48,4 +48,18 @@ export const updatingAppointment = async (id, data) => {
     }
 };
 
+
+export const deleteAppointment = async (id)=>{
+    try {
+        const response = await axiosInstance({
+            url: `/appointment/deleteAppointment/${id}`,  
+            method: "DELETE",
+            withCredentials: true
+        })
+        return response?.data;
+    } catch (error) {
+        console.error('Error deleting appointment:', error); 
+    }
+}
+
 export default axiosInstance;
