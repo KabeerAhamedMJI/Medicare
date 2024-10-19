@@ -59,7 +59,11 @@ export const verifyOtpLogin = async (req, res) => {
         }
 
         const token = generateToken(email, 'admin');
-        res.cookie('token', token)
+        res.cookie('token', token, {
+            sameSite: "None",
+            secure: true,
+            httpOnly: true,
+        });
 
         cache.del(email);
         res.json({ success: true, message: "Login successful" });
